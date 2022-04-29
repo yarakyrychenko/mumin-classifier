@@ -22,9 +22,9 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-train_df = pd.read_csv(f"{args.data_dir}/train.csv")
-val_df = pd.read_csv(f"{args.data_dir}/val.csv")
-test_df = pd.read_csv(f"{args.data_dir}/test.csv")
+train_df = pd.read_csv(f"{args.data_dir}/train_m.csv")
+val_df = pd.read_csv(f"{args.data_dir}/val_m.csv")
+test_df = pd.read_csv(f"{args.data_dir}/test_m.csv")
 
 
 tokenizer = MT5Tokenizer.from_pretrained("mt5-bert")
