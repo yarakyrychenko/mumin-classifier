@@ -10,6 +10,7 @@ from transformers import BertTokenizer, RobertaForSequenceClassification
 import sklearn
 import numpy as np
 from sklearn import metrics
+from sklearn.metrics import f1_score
 
 torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #from ray.tune.suggest.bayesopt import BayesOptSearch
@@ -104,6 +105,9 @@ print({'Accuracy': accuracy,
        'f1': f1,
        'precision': precision,
        'recall': recall})
+
+test_scores = f1_score(y_test, test_preds, average=None)
+print(f'macro-average F1: {100 * test_scores.mean():.2f}%')
 
 target_names=['Misinformation', 'Russian propaganda', 'Non-propaganda']
 report = sklearn.metrics.classification_report(y_pred=preds, y_true=predictions.label_ids,
