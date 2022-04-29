@@ -63,8 +63,8 @@ trainer = Trainer(
     tokenizer = tokenizer,
     train_dataset = train_data,
     eval_dataset = val_data,
-    model_init = finetuning_utils.model_init,
-    compute_metrics = finetuning_utils.compute_metrics,
+    model_init = finetuning_utils_t5.model_init,
+    compute_metrics = finetuning_utils_t5.compute_metrics,
     )
 
 print("START")
