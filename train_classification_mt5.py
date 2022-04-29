@@ -30,7 +30,7 @@ val_df = pd.read_csv("val.csv")
 test_df = pd.read_csv("test.csv")
 
 
-tokenizer = T5Tokenizer.from_pretrained("mt5-base")
+tokenizer = MT5Tokenizer.from_pretrained("mt5-base")
 train_data = tg_data.TGDataset(train_df, tokenizer)
 val_data = tg_data.TGDataset(val_df, tokenizer)
 test_data = tg_data.TGDataset(test_df, tokenizer)
