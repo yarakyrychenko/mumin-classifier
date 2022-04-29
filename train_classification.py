@@ -106,6 +106,9 @@ print({'Accuracy': accuracy,
        'precision': precision,
        'recall': recall})
 
+test_scores = f1_score(y_test, test_preds, average=None)
+print(f'macro-average F1: {100 * test_scores.mean():.2f}%')
+
 target_names=['Misinformation', 'Russian propaganda', 'Non-propaganda']
 report = sklearn.metrics.classification_report(y_pred=preds, y_true=predictions.label_ids,
                                                target_names=target_names)
