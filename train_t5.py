@@ -22,9 +22,9 @@ parser.add_argument(
 
 args = parser.parse_args()
 
-train_df = pd.read_csv(f"{args.data_dir}/train.csv")
-val_df = pd.read_csv(f"{args.data_dir}/val.csv")
-test_df = pd.read_csv(f"{args.data_dir}/test.csv")
+train_df = pd.read_csv(f"{args.data_dir}/train_en.csv")
+val_df = pd.read_csv(f"{args.data_dir}/val_en.csv")
+test_df = pd.read_csv(f"{args.data_dir}/test_en.csv")
 
 
 tokenizer = T5Tokenizer.from_pretrained("t5-bert")
