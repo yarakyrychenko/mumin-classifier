@@ -11,6 +11,7 @@ from transformers import BertTokenizer, XLMRobertaForSequenceClassification
 import sklearn
 import numpy as np
 from sklearn import metrics
+from sklearn.metrics import f1_score
 
 torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #from ray.tune.suggest.bayesopt import BayesOptSearch
