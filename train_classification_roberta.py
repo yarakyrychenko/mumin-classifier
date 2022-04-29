@@ -15,7 +15,7 @@ torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 #from ray.tune.suggest.bayesopt import BayesOptSearch
 
 parser = argparse.ArgumentParser(
-    description="Finetune an XLM-RoBERTa model on the TG dataset."
+    description="Finetune an RoBERTa model on the TG dataset."
 )
 parser.add_argument(
     "--data_dir",
@@ -30,7 +30,7 @@ val_df = pd.read_csv("val.csv")
 test_df = pd.read_csv("test.csv")
 
 
-tokenizer = RobertaTokenizer.from_pretrained("xlm-roberta-base")
+tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 train_data = tg_data.TGDataset(train_df, tokenizer)
 val_data = tg_data.TGDataset(val_df, tokenizer)
 test_data = tg_data.TGDataset(test_df, tokenizer)
