@@ -27,7 +27,7 @@ val_df = pd.read_csv(f"{args.data_dir}/val.csv")
 test_df = pd.read_csv(f"{args.data_dir}/test.csv")
 
 
-tokenizer = T5Tokenizer.from_pretrained("mt5-bert")
+tokenizer = MT5Tokenizer.from_pretrained("mt5-bert")
 train_data = tg_data.TGDataset(train_df, tokenizer)
 val_data = tg_data.TGDataset(val_df, tokenizer)
 test_data = tg_data.TGDataset(test_df, tokenizer)
