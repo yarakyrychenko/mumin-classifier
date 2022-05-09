@@ -71,7 +71,7 @@ print({'accuracy': accuracy,
        'precision': precision,
        'recall': recall})
 
-test_scores = f1_score(test_data.label, preds, average=None)
+test_scores = f1_score(test_data.labels, preds, average=None)
 print(f'macro-average F1: {100 * test_scores.mean():.4f}%')
 
 
