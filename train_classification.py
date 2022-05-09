@@ -31,7 +31,7 @@ trainingargs = TrainingArguments(
     do_eval=True,
     disable_tqdm=False,
     learning_rate=1e-5,
-    num_train_epochs=1,
+    num_train_epochs=10,
     weight_decay=0.01,
     logging_steps=500,
     logging_first_step=True,
@@ -71,7 +71,7 @@ print({'accuracy': accuracy,
        'precision': precision,
        'recall': recall})
 
-test_scores = f1_score(y_test, test_preds, average=None)
+test_scores = f1_score(test_data.label, preds, average=None)
 print(f'macro-average F1: {100 * test_scores.mean():.4f}%')
 
 
