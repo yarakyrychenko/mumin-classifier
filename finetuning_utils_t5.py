@@ -23,6 +23,6 @@ def model_init():
     from transformers import T5Config, T5Model
 
     configuration = T5Config()
-    model = T5Model(configuration).from_pretrained("t5-base", num_labels=3)
+    model = T5Model(configuration).from_pretrained("t5-base")
 
     return model

@@ -23,7 +23,7 @@ def model_init():
     from transformers import MT5Config, MT5Model
 
     configuration = MT5Config()
-    model = MT5Model(configuration).from_pretrained("mt5-base", num_labels=3)
+    model = MT5Model(configuration).from_pretrained("mt5-base")
 
     return model
 

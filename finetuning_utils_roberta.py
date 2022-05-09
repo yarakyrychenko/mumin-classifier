@@ -23,6 +23,6 @@ def model_init():
     from transformers import RobertaConfig, RobertaForSequenceClassification
 
     configuration = RobertaConfig()
-    model = RobertaForSequenceClassification(configuration).from_pretrained("roberta-base", num_labels=3)
+    model = RobertaForSequenceClassification(configuration).from_pretrained("roberta-base")
 
     return model

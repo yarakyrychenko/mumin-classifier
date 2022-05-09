@@ -16,15 +16,14 @@ train_df = pd.read_csv("data/train_m.csv")
 val_df = pd.read_csv("data/val_m.csv")
 test_df = pd.read_csv("data/test_m.csv")
 
-
 tokenizer = MT5Tokenizer.from_pretrained("mt5-base")
 train_data = tg_data.TGDataset(train_df, tokenizer)
 val_data = tg_data.TGDataset(val_df, tokenizer)
 test_data = tg_data.TGDataset(test_df, tokenizer)
 
-
+model_path = "out_mt5"
 trainingargs = TrainingArguments(
-    output_dir='out',
+    output_dir=model_path,
     do_train=True,
     do_eval=True,
     disable_tqdm=False,
@@ -58,7 +57,6 @@ trainer.save_model()
 print("MODEL SAVED")    
 
 #Metrics
-model_path = "out"
 model = MT5Model.from_pretrained(model_path, num_labels=2)
 
 predictions = trainer.predict(test_data)
@@ -68,7 +66,7 @@ preds = np.argmax(predictions.predictions, axis=-1)
 accuracy = metrics.accuracy_score(y_true=predictions.label_ids, y_pred=preds)
 precision, recall, f1, _ = metrics.precision_recall_fscore_support(y_true=predictions.label_ids, y_pred=preds, average="macro")
 
-print({'Accuracy': accuracy,
+print({'accuracy': accuracy,
        'f1': f1,
        'precision': precision,
        'recall': recall})
@@ -76,7 +74,7 @@ print({'Accuracy': accuracy,
 test_scores = f1_score(y_test, test_preds, average=None)
 print(f'macro-average F1: {100 * test_scores.mean():.4f}%')
 
-target_names=['Misinformation', 'Factual']
-report = sklearn.metrics.classification_report(y_pred=preds, y_true=predictions.label_ids,
-                                               target_names=target_names)
+
+report = sklearn.metrics.classification_report(y_pred=preds, y_true=predictions.label_ids)
+
 print(report)

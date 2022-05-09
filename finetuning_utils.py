@@ -23,7 +23,7 @@ def model_init():
     from transformers import XLMRobertaConfig, XLMRobertaForSequenceClassification
 
     configuration = XLMRobertaConfig()
-    model = XLMRobertaForSequenceClassification(configuration).from_pretrained("xlm-roberta-base", num_labels=3)
+    model = XLMRobertaForSequenceClassification(configuration).from_pretrained("xlm-roberta-base")
 
     return model
 
