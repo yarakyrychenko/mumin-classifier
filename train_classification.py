@@ -14,9 +14,9 @@ from sklearn import metrics
 from sklearn.metrics import f1_score
 
 
-train_df = pd.read_csv("data/train_m.csv")
-val_df = pd.read_csv("data/val_m.csv")
-test_df = pd.read_csv("data/test_m.csv")
+train_df = pd.read_csv("mumin-classifier/data/train_m.csv")
+val_df = pd.read_csv("mumin-classifier/data/val_m.csv")
+test_df = pd.read_csv("mumin-classifier/data/test_m.csv")
 
 
 tokenizer = XLMRobertaTokenizer.from_pretrained("xlm-roberta-base")
@@ -50,14 +50,14 @@ trainer = Trainer(
 
 
 print("STARTED TRAINING")
-trainer.train(resume_from_checkpoint=True)
+trainer.train()
 print("TRAINING DONE")
 
 trainer.save_model()
 print("MODEL SAVED")    
 
 #Metrics
-model = XLMRobertaForSequenceClassification.from_pretrained(model_path, num_labels=3)
+model = XLMRobertaForSequenceClassification.from_pretrained(model_path)
 
 predictions = trainer.predict(val_data)
 preds = np.argmax(predictions.predictions, axis=-1)

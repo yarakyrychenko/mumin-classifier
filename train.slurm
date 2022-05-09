@@ -14,4 +14,4 @@
 singularity exec --nv --bind /scratch/yk1937 --overlay /scratch/yk1937/overlay-25GB-500K.ext3:ro /scratch/yk1937/cuda11.4.2-cudnn8.2.4-devel-ubuntu20.04.3.sif /bin/bash -c "
 source /ext3/env.sh
 conda activate
-python /scratch/yk1937/train_classification.py"
+python /scratch/yk1937/mumin-classifier/train_classification.py"
