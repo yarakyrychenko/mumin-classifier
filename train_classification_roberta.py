@@ -12,9 +12,9 @@ import numpy as np
 from sklearn import metrics
 from sklearn.metrics import f1_score
 
-train_df = pd.read_csv("data/train_en.csv")
-val_df = pd.read_csv("data/val_en.csv")
-test_df = pd.read_csv("data/test_en.csv")
+train_df = pd.read_csv("mumin-classifier/data/train_en.csv")
+val_df = pd.read_csv("mumin-classifier/data/val_en.csv")
+test_df = pd.read_csv("mumin-classifier/data/test_en.csv")
 
 tokenizer = RobertaTokenizer.from_pretrained("roberta-base")
 train_data = tg_data.TGDataset(train_df, tokenizer)
@@ -48,7 +48,7 @@ trainer = Trainer(
 
 
 print("STARTED TRAINING")
-trainer.train(resume_from_checkpoint=True)
+trainer.train()
 print("TRAINING DONE")
 
 trainer.save_model()

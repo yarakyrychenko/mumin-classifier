@@ -12,9 +12,9 @@ import numpy as np
 from sklearn import metrics
 from sklearn.metrics import f1_score
 
-train_df = pd.read_csv("data/train_m.csv")
-val_df = pd.read_csv("data/val_m.csv")
-test_df = pd.read_csv("data/test_m.csv")
+train_df = pd.read_csv("mumin-classifier/data/train_m.csv")
+val_df = pd.read_csv("mumin-classifier/data/val_m.csv")
+test_df = pd.read_csv("mumin-classifier/data/test_m.csv")
 
 tokenizer = MT5Tokenizer.from_pretrained("mt5-base")
 train_data = tg_data.TGDataset(train_df, tokenizer)
@@ -48,7 +48,7 @@ trainer = Trainer(
 
 
 print("STARTED TRAINING")
-trainer.train(resume_from_checkpoint=True)
+trainer.train()
 print("TRAINING DONE")
 
 #trainer.evaluate()
