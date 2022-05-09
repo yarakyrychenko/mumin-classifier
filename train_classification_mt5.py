@@ -12,23 +12,9 @@ import numpy as np
 from sklearn import metrics
 from sklearn.metrics import f1_score
 
-torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-#from ray.tune.suggest.bayesopt import BayesOptSearch
-
-parser = argparse.ArgumentParser(
-    description="Finetune an MT5 model on the TG dataset."
-)
-parser.add_argument(
-    "--data_dir",
-    type=str,
-    help="Directory containing the TG dataset. Can be downloaded from https://github.com/yarakyrychenko/tg-misinfo-data.",
-)
-
-args = parser.parse_args()
-
-train_df = pd.read_csv("train.csv")
-val_df = pd.read_csv("val.csv")
-test_df = pd.read_csv("test.csv")
+train_df = pd.read_csv("data/train_m.csv")
+val_df = pd.read_csv("data/val_m.csv")
+test_df = pd.read_csv("data/test_m.csv")
 
 
 tokenizer = MT5Tokenizer.from_pretrained("mt5-base")
@@ -52,13 +38,6 @@ trainingargs = TrainingArguments(
     )
 
 
-def hp_space(trial):
-    from ray import tune
-    space = {
-        "learning_rate": tune.loguniform(1e-5, 5e-5),
-    }
-    return space
-
 trainer = Trainer(
     args = trainingargs,
     tokenizer = tokenizer,
@@ -68,33 +47,21 @@ trainer = Trainer(
     compute_metrics = finetuning_utils_mt5.compute_metrics,
     )
 
-print("START")
-
-#best = trainer.hyperparameter_search(
-#    hp_space = hp_space,
-#    direction= "minimize",
-#    backend="ray",
-#    n_trials= 5,
-#    search_alg = BayesOptSearch(metric="objective", mode="min"),
-#    compute_objective=lambda obj : obj['eval_loss']
-#)
-#print(best)
-
 
 print("STARTED TRAINING")
 trainer.train(resume_from_checkpoint=True)
 print("TRAINING DONE")
 
-trainer.evaluate()
+#trainer.evaluate()
 
 trainer.save_model()
-print("done done")    
+print("MODEL SAVED")    
 
 #Metrics
 model_path = "out"
-model = MT5Model.from_pretrained(model_path, num_labels=3)
+model = MT5Model.from_pretrained(model_path, num_labels=2)
 
-predictions = trainer.predict(val_data)
+predictions = trainer.predict(test_data)
 preds = np.argmax(predictions.predictions, axis=-1)
 
 
@@ -107,9 +74,9 @@ print({'Accuracy': accuracy,
        'recall': recall})
 
 test_scores = f1_score(y_test, test_preds, average=None)
-print(f'macro-average F1: {100 * test_scores.mean():.2f}%')
+print(f'macro-average F1: {100 * test_scores.mean():.4f}%')
 
-target_names=['Misinformation', 'Russian propaganda', 'Non-propaganda']
+target_names=['Misinformation', 'Factual']
 report = sklearn.metrics.classification_report(y_pred=preds, y_true=predictions.label_ids,
                                                target_names=target_names)
 print(report)

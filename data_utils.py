@@ -17,7 +17,7 @@ def encode_data(dataset, tokenizer, max_seq_length=128):
       containing attention masks for the data.
   """
 
-    message = dataset['message'].astype(str).values.tolist()
+    message = dataset['text'].astype(str).values.tolist()
 
     inputs = tokenizer(
       text= message,
@@ -39,7 +39,7 @@ def extract_labels(dataset):
     dataset: A Pandas dataframe containing the labels in the column 'label'.
   Returns:
     labels: A list of integers corresponding to the labels for each example,
-      where 0 is Misinformation, 1 is Russian Propaganda and 2 is Real News.
+      where 1 is Misinformation, 0 is factual. 
   """
     labels = dataset.label.astype(int).to_list()
 
