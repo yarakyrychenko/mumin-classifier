@@ -13,10 +13,12 @@ import numpy as np
 from sklearn import metrics
 from sklearn.metrics import f1_score
 
+print(torch.cuda.is_available())
+torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-train_df = pd.read_csv("mumin-classifier/data/train_m.csv")
-val_df = pd.read_csv("mumin-classifier/data/val_m.csv")
-test_df = pd.read_csv("mumin-classifier/data/test_m.csv")
+train_df = pd.read_csv("GitHub/mumin-classifier/data/train_m.csv")
+val_df = pd.read_csv("GitHub/mumin-classifier/data/val_m.csv")
+test_df = pd.read_csv("GitHub/mumin-classifier/data/test_m.csv")
 
 
 tokenizer = XLMRobertaTokenizer.from_pretrained("xlm-roberta-base")
@@ -31,7 +33,7 @@ trainingargs = TrainingArguments(
     do_eval=True,
     disable_tqdm=False,
     learning_rate=1e-5,
-    num_train_epochs=10,
+    num_train_epochs=2,
     weight_decay=0.01,
     logging_steps=500,
     logging_first_step=True,
