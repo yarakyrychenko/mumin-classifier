@@ -1,4 +1,3 @@
 # mumin-classifier
 
-
-Folder with data (mumin-small) not shared. 
+Models trained on Google Colaboratory GPU.
