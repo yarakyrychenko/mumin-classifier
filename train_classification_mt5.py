@@ -58,7 +58,8 @@ def extract_labels(dataset, tokenizer):
 
 
 
-    from torch.utils.data import Dataset
+
+from torch.utils.data import Dataset
 
 
 class TGDataset(Dataset):
