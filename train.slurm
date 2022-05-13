@@ -5,7 +5,7 @@
 #SBATCH --error=/scratch/yk1937/%j_%x.err
 #SBATCH --export=ALL
 #SBATCH --account=ds_ga_1012_2022sp
-#SBATCH --partition=n1s8-t4-1
+#SBATCH --partition=n1s8-v100-1
 #SBATCH --time=04:00:00
 #SBATCH --gres=gpu:1
 #SBATCH --mem=20G
